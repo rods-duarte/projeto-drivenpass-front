@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useCallback, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { Page, Content, AddData } from './style';
+import { Page, Content } from './style';
 import Header from '../../Header/index';
 import Categories from '../../Categories';
 import API from '../../../config';
@@ -10,8 +10,10 @@ import { CredentialsContext } from '../../../contexts/credentialsContext';
 import { CardsContext } from '../../../contexts/cardsContext';
 import { NotesContext } from '../../../contexts/notesContext';
 import { NetworksContext } from '../../../contexts/networksContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const { token } = useContext(TokenContext);
   const { credentials, setCredentials } = useContext(CredentialsContext);
   const { cards, setCards } = useContext(CardsContext);
@@ -30,14 +32,19 @@ export default function HomePage() {
       notesPromise,
       networksPromise,
     ]).then((values) => {
-      setCredentials(values[0].data);
-      setCards(values[1].data);
-      setNotes(values[2].data);
-      setNetworks(values[3].data);
+      setCredentials(values[0].data.data);
+      setCards(values[1].data.data);
+      setNotes(values[2].data.data);
+      setNetworks(values[3].data.data);
     }).catch(err => console.log(err));
   }, []);
 
-  useEffect(() => {getData()}, []);
+  useEffect(() => {
+    if (!token) {
+      navigate('/')
+    }
+    getData()
+  }, []);
 
   return (
     <Page>
@@ -46,7 +53,6 @@ export default function HomePage() {
         <div>Minhas Senhas</div>
         <Categories />
       </Content>
-      <AddData>+</AddData>
     </Page>
   );
 }

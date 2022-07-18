@@ -27,19 +27,3 @@ export const Content = styled.article`
     align-items: center;
   }
 `;
-
-export const AddData = styled.button`
-  width: 51px;
-  height: 51px;
-  background-color: #005985;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 50%;
-  font-size: 40px;
-`;
