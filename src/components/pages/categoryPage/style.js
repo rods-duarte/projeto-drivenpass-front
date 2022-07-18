@@ -4,13 +4,17 @@ export const Page = styled.main`
   width: 100%;
   min-height: 100vh;
   padding-top: 20px;
+  padding-bottom: 50px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 18px;
 
-  a {
+  position: relative;
+
+  a,
+  .return {
     margin-top: 30px;
     padding-top: 15px;
     color: #000;
@@ -22,23 +26,28 @@ export const Page = styled.main`
     left: 10px;
     bottom: 10px;
   }
-`;
 
-export const Content = styled.article`
-  width: 100%;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
+  .return {
+    background-color: #0000;
+    border: none;
+  }
 
-  & > div:first-child {
+  .category {
     width: 100%;
     height: 41px;
+    margin-top: 20px;
     background-color: #005985;
     color: #fff;
     padding-left: 15px;
     display: flex;
     align-items: center;
   }
+`;
+
+export const Content = styled.article`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   ul {
     list-style: none;

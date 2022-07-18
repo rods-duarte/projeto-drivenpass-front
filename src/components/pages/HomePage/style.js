@@ -13,7 +13,7 @@ export const Page = styled.main`
 
 export const Content = styled.article`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
 
