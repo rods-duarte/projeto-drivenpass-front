@@ -85,3 +85,19 @@ export const AddData = styled.button`
   border-radius: 50%;
   font-size: 40px;
 `;
+
+export const CreateData = styled.button`
+  width: 51px;
+  height: 51px;
+  background-color: #0000;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  font-size: 40px;
+`;

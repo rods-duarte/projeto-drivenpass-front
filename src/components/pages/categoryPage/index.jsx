@@ -7,15 +7,18 @@ import Credential from '../../Credential';
 import Note from '../../Notes';
 import Card from '../../Card';
 import Network from '../../Network';
+import CardForm from '../../CardForm';
 // images
 import credentialIcon from '../../../assets/images/credential.svg';
 import cardIcon from '../../../assets/images/card.svg';
 import noteIcon from '../../../assets/images/note.svg';
 import networkIcon from '../../../assets/images/network.svg';
+// import deleteIcon from '../../../assets/images/delete.svg';
 
 export default function CategoryPage({ title }) {
   const location = useLocation();
   const [data, setData] = useState(null);
+  const [openForms, setOpenForms] = useState(false);
 
   const icons = {
     Credenciais: credentialIcon,
@@ -31,6 +34,13 @@ export default function CategoryPage({ title }) {
     Redes: <Network network={data} />,
   };
 
+  const forms = {
+    Credenciais: <Credential credential={data} />,
+    'Notas Seguras': <Note note={data} />,
+    Cartoes: <CardForm />,
+    Redes: <Network network={data} />,
+  };
+
   const categoryList = location.state.data.map((credential) => (
     <li onClick={() => setData(credential)}>
       <img src={icons[title]} alt="" />
@@ -39,6 +49,24 @@ export default function CategoryPage({ title }) {
   ));
 
   const list = categoryList || 'Vazio :C';
+
+  if (openForms) {
+    console.log('entrou forms');
+    return (
+      <Page>
+        <Header />
+        <div className="category">{title}</div>
+        {forms[title]}
+        <button
+          className="return"
+          type="button"
+          onClick={() => setOpenForms(false)}
+        >
+          {'< Voltar'}
+        </button>
+      </Page>
+    );
+  }
 
   if (data) {
     return (
@@ -60,7 +88,7 @@ export default function CategoryPage({ title }) {
         <div className="category">{title}</div>
         <ul>{list}</ul>
       </Content>
-      <AddData>+</AddData>
+      <AddData onClick={() => setOpenForms(true)}>+</AddData>
       <Link to="/home">{'< Voltar'}</Link>
     </Page>
   );

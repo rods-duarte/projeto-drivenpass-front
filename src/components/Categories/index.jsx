@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CategoriesContainer } from './style';
 // contexts
@@ -19,6 +19,11 @@ export default function Categories() {
   const { cards } = useContext(CardsContext);
   const { notes } = useContext(NotesContext);
   const { networks } = useContext(NetworksContext);
+  // const [countCards, setCountCards] = useState(cards?.length);
+
+  useEffect(() => {
+    // setCountCards(cards?.length);
+  }, [cards]);
 
   return (
     <CategoriesContainer>
