@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import * as s from './style';
@@ -12,8 +12,14 @@ export default function SigninPage() {
   const { token, setToken } = useContext(TokenContext);
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (token !== undefined) {
+      navigate('/home');
+    }
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,10 +37,6 @@ export default function SigninPage() {
       .finally(() => {
         setLoading(false);
       });
-  }
-
-  if (token) {
-    navigate('/home');
   }
 
   let modal;
@@ -58,7 +60,7 @@ export default function SigninPage() {
         <label htmlFor="email">
           Usuario (e-mail)
           <input
-            className={loading && 'disabled'}
+            className={loading ? 'disabled' : ''}
             id="email"
             type="text"
             disabled={loading}
@@ -71,7 +73,7 @@ export default function SigninPage() {
         <label htmlFor="password">
           Senha
           <input
-            className={loading && 'disabled'}
+            className={loading ? 'disabled' : ''}
             id="password"
             type="password"
             disabled={loading}
