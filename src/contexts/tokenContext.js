@@ -4,7 +4,7 @@ import { useLocalStorage } from '../hooks';
 export const TokenContext = createContext();
 
 export function TokenProvider({ children }) {
-  const [token, setToken] = useLocalStorage('token', undefined);
+  const [token, setToken] = useLocalStorage('token', null);
 
   return (
     // eslint-disable-next-line

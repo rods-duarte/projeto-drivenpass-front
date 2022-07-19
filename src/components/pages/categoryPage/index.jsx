@@ -1,24 +1,35 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Page, Content, AddData } from './style';
 // components
 import Header from '../../Header';
 import Credential from '../../Credential';
-import Note from '../../Notes';
+import Note from '../../Note';
 import Card from '../../Card';
 import Network from '../../Network';
 import CardForm from '../../CardForm';
+import CredentialForm from '../../CredentialForm';
+import NoteForm from '../../NoteForm';
+import NetworkForm from '../../NetworkForm';
 // images
 import credentialIcon from '../../../assets/images/credential.svg';
 import cardIcon from '../../../assets/images/card.svg';
 import noteIcon from '../../../assets/images/note.svg';
 import networkIcon from '../../../assets/images/network.svg';
-// import deleteIcon from '../../../assets/images/delete.svg';
+import { TokenContext } from '../../../contexts/tokenContext';
 
 export default function CategoryPage({ title }) {
+  const navigate = useNavigate();
   const location = useLocation();
+  const { token } = useContext(TokenContext);
   const [data, setData] = useState(null);
   const [openForms, setOpenForms] = useState(false);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/');
+    }
+  }, []);
 
   const icons = {
     Credenciais: credentialIcon,
@@ -35,10 +46,10 @@ export default function CategoryPage({ title }) {
   };
 
   const forms = {
-    Credenciais: <Credential credential={data} />,
-    'Notas Seguras': <Note note={data} />,
+    Credenciais: <CredentialForm />,
+    'Notas Seguras': <NoteForm />,
     Cartoes: <CardForm />,
-    Redes: <Network network={data} />,
+    Redes: <NetworkForm />,
   };
 
   const categoryList = location.state.data.map((credential) => (

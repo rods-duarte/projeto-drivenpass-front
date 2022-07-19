@@ -16,7 +16,7 @@ export default function SigninPage() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (token !== undefined) {
+    if (token) {
       navigate('/home');
     }
   }, []);
