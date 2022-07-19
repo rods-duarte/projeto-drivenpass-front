@@ -12,6 +12,12 @@ export const Data = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+    height: fit-content;
+    width: 100%;
+  }
+
+  p {
+    word-wrap: break-word;
   }
 
   h1 {

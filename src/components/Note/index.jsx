@@ -22,7 +22,7 @@ export default function Note({ note }) {
       <div>
         <h2>Nota</h2>
 
-        {note.content}
+        <p>{note.content}</p>
       </div>
       <button type="button" onClick={deleteNote}>
         X
