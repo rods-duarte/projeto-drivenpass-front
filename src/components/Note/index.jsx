@@ -5,36 +5,26 @@ import { Data } from './style';
 import { TokenContext } from '../../contexts/tokenContext';
 import API from '../../config';
 
-export default function Credential({ credential }) {
+export default function Note({ note }) {
   const navigate = useNavigate();
   const { token } = useContext(TokenContext);
 
-  function deleteCredential() {
+  function deleteNote() {
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    axios.delete(`${API}/credentials/${credential.id}`, config).then(() => {
+    axios.delete(`${API}/notes/${note.id}`, config).then(() => {
       navigate('/home');
     });
   }
 
   return (
     <Data>
-      <h1>{credential.title}</h1>
+      <h1>{note.title}</h1>
       <div>
-        <h2>URL</h2>
+        <h2>Nota</h2>
 
-        {credential.url}
+        {note.content}
       </div>
-      <div>
-        <h2>Usuario</h2>
-
-        {credential.username}
-      </div>
-      <div>
-        <h2>Senha</h2>
-
-        {credential.password}
-      </div>
-      <button type="button" onClick={deleteCredential}>
+      <button type="button" onClick={deleteNote}>
         X
       </button>
     </Data>

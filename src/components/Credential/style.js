@@ -23,4 +23,21 @@ export const Data = styled.div`
   h2 {
     font-size: 20px;
   }
+
+  button {
+    width: 51px;
+    height: 51px;
+    background-color: #f52424;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bolder;
+  }
 `;
