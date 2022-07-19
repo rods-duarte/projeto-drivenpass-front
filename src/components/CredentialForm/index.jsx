@@ -23,7 +23,6 @@ export default function CardForm() {
       .post(`${API}/credentials`, createCredential, config)
       .then(() => {
         setSuccessModal(true);
-        navigate('/home');
       })
       .catch((err) => {
         console.log(err);
@@ -39,7 +38,12 @@ export default function CardForm() {
     const title = 'Muito Bem!';
     const message = 'Cadastro feito com sucesso!';
     modal = (
-      <Modal title={title} message={message} setOpenModal={setSuccessModal} />
+      <Modal
+        title={title}
+        message={message}
+        setOpenModal={setSuccessModal}
+        doFunction={() => navigate('/home')}
+      />
     );
   }
 
@@ -80,7 +84,7 @@ export default function CardForm() {
             type="text"
             placeholder="https://site.com"
             disabled={loading}
-            value={createCredential?.title}
+            value={createCredential?.url}
             onChange={(e) => {
               setCreateCredential({
                 ...createCredential,

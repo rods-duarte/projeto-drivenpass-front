@@ -23,7 +23,6 @@ export default function CardForm() {
       .post(`${API}/networks`, createNetwork, config)
       .then(() => {
         setSuccessModal(true);
-        navigate('/home');
       })
       .catch((err) => {
         console.log(err);
@@ -39,7 +38,12 @@ export default function CardForm() {
     const title = 'Muito Bem!';
     const message = 'Cadastro feito com sucesso!';
     modal = (
-      <Modal title={title} message={message} setOpenModal={setSuccessModal} />
+      <Modal
+        title={title}
+        message={message}
+        setOpenModal={setSuccessModal}
+        doFunction={() => navigate('/home')}
+      />
     );
   }
 
@@ -61,7 +65,7 @@ export default function CardForm() {
             className={loading ? 'disabled' : ''}
             id="title"
             type="text"
-            placeholder="site X"
+            placeholder="Titulo"
             disabled={loading}
             value={createNetwork?.title}
             onChange={(e) => {
@@ -72,36 +76,19 @@ export default function CardForm() {
             }}
           />
         </label>
-        <label htmlFor="url">
-          Website
+        <label htmlFor="name">
+          Nome da rede
           <input
             className={loading ? 'disabled' : ''}
-            id="url"
+            id="name"
             type="text"
-            placeholder="https://site.com"
+            placeholder="rede"
             disabled={loading}
-            value={createNetwork?.title}
+            value={createNetwork?.name}
             onChange={(e) => {
               setCreateNetwork({
                 ...createNetwork,
-                url: e.target.value,
-              });
-            }}
-          />
-        </label>
-        <label htmlFor="username">
-          Username
-          <input
-            className={loading ? 'disabled' : ''}
-            id="username"
-            type="text"
-            placeholder="username"
-            disabled={loading}
-            value={createNetwork?.username}
-            onChange={(e) => {
-              setCreateNetwork({
-                ...createNetwork,
-                username: e.target.value,
+                name: e.target.value,
               });
             }}
           />
@@ -112,7 +99,7 @@ export default function CardForm() {
             className={loading ? 'disabled' : ''}
             id="password"
             type="text"
-            placeholder="1234"
+            placeholder="senha"
             disabled={loading}
             value={createNetwork?.password}
             onChange={(e) => {
