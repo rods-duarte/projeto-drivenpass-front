@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CategoriesContainer } from './style';
 // contexts
@@ -13,51 +13,58 @@ import cardIcon from '../../assets/images/card.svg';
 import noteIcon from '../../assets/images/note.svg';
 import networkIcon from '../../assets/images/network.svg';
 
-export default function Categories() {
+export default function Categories({ loading }) {
   const navigate = useNavigate();
   const { credentials } = useContext(CredentialsContext);
   const { cards } = useContext(CardsContext);
   const { notes } = useContext(NotesContext);
   const { networks } = useContext(NetworksContext);
-  // const [countCards, setCountCards] = useState(cards?.length);
-
-  useEffect(() => {
-    // setCountCards(cards?.length);
-  }, [cards]);
 
   return (
     <CategoriesContainer>
       <li
         onClick={() =>
-          navigate('/credentials', { state: { data: credentials } })
+          !loading && navigate('/credentials', { state: { data: credentials } })
         }
       >
         <div>
           <img src={credentialIcon} alt="credentials" />
           <span>Credenciais</span>
         </div>
-        <div>{credentials?.length || 0}</div>
+        <div>{loading ? '' : credentials?.length}</div>
       </li>
-      <li onClick={() => navigate('/notes', { state: { data: notes } })}>
+      <li
+        onClick={() =>
+          !loading && navigate('/notes', { state: { data: notes } })
+        }
+      >
         <div>
           <img src={noteIcon} alt="notes" />
           <span>Notas Seguras</span>
         </div>
-        <div>{cards?.length || 0}</div>
+        <div>{loading ? '' : notes?.length}</div>
       </li>
-      <li onClick={() => navigate('/cards', { state: { data: cards } })}>
+      <li
+        onClick={() =>
+          !loading && navigate('/cards', { state: { data: cards } })
+        }
+      >
         <div>
           <img src={cardIcon} alt="cards" />
           <span>Cartoes</span>
         </div>
-        <div>{notes?.length || 0}</div>
+        <div>{loading ? '' : cards?.length}</div>
       </li>
-      <li onClick={() => navigate('/networks', { state: { data: networks } })}>
+      <li
+        onClick={() =>
+          !loading && navigate('/networks', { state: { data: networks } })
+        }
+      >
         <div>
           <img src={networkIcon} alt="networks" />
           <span>Senhas de Wi-Fi</span>
         </div>
-        <div>{networks?.length || 0}</div>
+        <div>{loading ? '' : networks?.length}</div>
       </li>
     </CategoriesContainer>
   );
